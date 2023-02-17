@@ -1,29 +1,28 @@
 package bg.softuni.battleships.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import bg.softuni.battleships.model.enums.ShipType;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "ships")
-public class ShipEntity extends BaseEntity {
+@Table(name = "categories")
+public class CategoryEntity extends BaseEntity {
 
 	@Column(nullable = false, unique = true)
-	private String name;
+	@Enumerated(EnumType.ORDINAL)
+	private ShipType name;
 
-	private long health;
+	@Column(columnDefinition = "TEXT")
+	private String description;
 
-	private long power;
-
-	private LocalDate created;
-
-	@ManyToOne
-	private UserEntity user;
+	public CategoryEntity(ShipType name) {
+		this.name = name;
+	}
 }
