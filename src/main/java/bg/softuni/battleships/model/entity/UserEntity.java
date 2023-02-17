@@ -1,9 +1,13 @@
 package bg.softuni.battleships.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+@Builder
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -21,4 +25,8 @@ public class UserEntity extends BaseEntity {
 
 	@Column(nullable = false)
 	private String fullName;
+
+	public UserEntity() {
+
+	}
 }
