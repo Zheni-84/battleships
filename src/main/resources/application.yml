@@ -1,0 +1,14 @@
+spring:
+   datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: "jdbc:mysql://localhost:3306/mobilele?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8"
+      username: user
+      password: user
+#   sql:
+#      init:
+#         mode: always
+   jpa:
+      database-platform: org.hibernate.dialect.MySQL8Dialect
+      hibernate:
+         ddl-auto: update
+      defer-datasource-initialization: true
