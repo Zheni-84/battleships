@@ -31,7 +31,7 @@ public class ShipController {
 
 	@PostMapping("/ships/add")
 	public String ships(@Valid CreateShipDTO createShipDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-		if (bindingResult.hasErrors() || this.shipService.create(createShipDTO)) {
+		if (bindingResult.hasErrors() || !this.shipService.create(createShipDTO)) {
 			redirectAttributes.addFlashAttribute("createShipDTO", createShipDTO);
 			redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.createShipDTO", bindingResult);
 
