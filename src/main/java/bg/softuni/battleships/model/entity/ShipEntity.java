@@ -6,6 +6,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "ships")
+@Accessors(chain = true)
 public class ShipEntity extends BaseEntity {
 
 	@Column(nullable = false, unique = true)
