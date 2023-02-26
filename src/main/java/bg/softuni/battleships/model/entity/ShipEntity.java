@@ -1,9 +1,6 @@
 package bg.softuni.battleships.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -30,6 +27,6 @@ public class ShipEntity extends BaseEntity {
 	@ManyToOne
 	private CategoryEntity category;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private UserEntity owner;
 }

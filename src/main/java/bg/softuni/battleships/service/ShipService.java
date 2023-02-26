@@ -1,6 +1,7 @@
 package bg.softuni.battleships.service;
 
 import bg.softuni.battleships.model.dto.CreateShipDTO;
+import bg.softuni.battleships.model.dto.ShipEntityDTO;
 import bg.softuni.battleships.model.entity.CategoryEntity;
 import bg.softuni.battleships.model.entity.ShipEntity;
 import bg.softuni.battleships.model.entity.UserEntity;
@@ -11,7 +12,9 @@ import bg.softuni.battleships.repository.UserRepository;
 import bg.softuni.battleships.session.LoggedUser;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ShipService {
@@ -55,5 +58,23 @@ public class ShipService {
 				.setOwner(owner.get());
 		this.shipRepository.save(ship);
 		return true;
+	}
+
+	public List<ShipEntityDTO> getShipsOwnedBy(Long ownerId) {
+		return this.shipRepository.findAllByOwnerId(ownerId).stream()
+				.map(ship -> new ShipEntityDTO().setId(ship.getId())
+						.setName(ship.getName())
+						.setHealth(ship.getHealth())
+						.setPower(ship.getPower()))
+				.collect(Collectors.toList());
+	}
+
+	public List<ShipEntityDTO> getShipsNotOwnedBy(Long ownerId) {
+		return this.shipRepository.findAllByOwnerIdNot(ownerId).stream()
+				.map(ship -> new ShipEntityDTO().setId(ship.getId())
+						.setName(ship.getName())
+						.setHealth(ship.getHealth())
+						.setPower(ship.getPower()))
+				.collect(Collectors.toList());
 	}
 }

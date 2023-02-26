@@ -13,10 +13,11 @@
                 <strong class="bg-blur rounded border-white pl-3 font-weight-bold">Add New Ship</strong></h1>
         </div>
         <div class="container bg-blur rounded p-5 mt-5 w-75">
-            <form th:action="@{/ships/add}"
-                  th:method="POST"
-                  th:object="${createShipDTO}"
-                  class=" text-center text-light">
+            <form
+                    th:action="@{/ships/add}"
+                    th:method="POST"
+                    th:object="${createShipDTO}"
+                    class=" text-center text-light">
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
