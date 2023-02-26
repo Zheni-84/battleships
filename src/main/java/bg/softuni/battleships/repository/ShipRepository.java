@@ -1,6 +1,5 @@
 package bg.softuni.battleships.repository;
 
-import bg.softuni.battleships.model.dto.ShipEntityDTO;
 import bg.softuni.battleships.model.entity.ShipEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,4 +15,6 @@ public interface ShipRepository extends JpaRepository<ShipEntity, Long> {
 	List<ShipEntity> findAllByOwnerId(Long ownerId);
 
 	List<ShipEntity> findAllByOwnerIdNot(Long ownerId);
+
+	List<ShipEntity> findByOrderByHealthAscNameDescPowerAsc();
 }

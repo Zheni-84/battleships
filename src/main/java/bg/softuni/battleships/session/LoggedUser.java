@@ -26,4 +26,7 @@ public class LoggedUser {
 		this.fullName = null;
 	}
 
+	public boolean isLogged() {
+		return this.getId() != null;
+	}
 }

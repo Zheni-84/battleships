@@ -77,4 +77,13 @@ public class ShipService {
 						.setPower(ship.getPower()))
 				.collect(Collectors.toList());
 	}
+
+	public List<ShipEntityDTO> getAllSorted() {
+		return this.shipRepository.findByOrderByHealthAscNameDescPowerAsc().stream()
+				.map(ship -> new ShipEntityDTO().setId(ship.getId())
+						.setName(ship.getName())
+						.setHealth(ship.getHealth())
+						.setPower(ship.getPower()))
+				.collect(Collectors.toList());
+	}
 }

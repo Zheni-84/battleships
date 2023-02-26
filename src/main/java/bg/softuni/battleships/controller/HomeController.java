@@ -38,9 +38,11 @@ public class HomeController {
 		Long loggedUserId = this.loggedUser.getId();
 		List<ShipEntityDTO> ownShips = this.shipService.getShipsOwnedBy(loggedUserId);
 		List<ShipEntityDTO> enemyShips = this.shipService.getShipsNotOwnedBy(loggedUserId);
+		List<ShipEntityDTO> sortedShips = this.shipService.getAllSorted();
 
 		model.addAttribute("ownShips", ownShips);
 		model.addAttribute("enemyShips", enemyShips);
+		model.addAttribute("sortedShips", sortedShips);
 
 		return "home";
 	}
