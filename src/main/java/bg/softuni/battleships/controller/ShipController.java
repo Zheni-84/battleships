@@ -30,17 +30,17 @@ public class ShipController {
 
 	@GetMapping("/ships")
 	public String ships() {
-		if (this.authService.isLogged()) {
-			return SHIP_ADD;
+		if (!this.authService.isLogged()) {
+			return "redirect:/";
 		}
 
-		return "login";
+		return SHIP_ADD;
 	}
 
 	@PostMapping("/ships")
 	public String ships(@Valid CreateShipDTO createShipDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-		if (this.authService.isLogged()) {
-			return SHIP_ADD;
+		if (!this.authService.isLogged()) {
+			return "redirect:/";
 		}
 
 		if (bindingResult.hasErrors() || !this.shipService.create(createShipDTO)) {

@@ -64,7 +64,7 @@ public class AuthService {
 		this.userSession.logout();
 	}
 
-	public long getLoggedUserId() {
+	public Long getLoggedUserId() {
 		return this.userSession.getId();
 	}
 }

@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class AuthController {
 
+	public static final String REDIRECT_LOGIN = "redirect:/login";
+	public static final String REDIRECT_HOME = "redirect:/home";
 	private final AuthService authService;
 
 	public AuthController(AuthService authService) {
@@ -32,11 +34,18 @@ public class AuthController {
 
 	@GetMapping("/register")
 	public String register() {
+		if(this.authService.isLogged()) {
+			return REDIRECT_HOME;
+		}
+
 		return "register";
 	}
 
 	@PostMapping("/register")
 	public String register(@Valid UserRegistrationDTO registrationDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+		if(this.authService.isLogged()) {
+			return REDIRECT_HOME;
+		}
 
 		if (bindingResult.hasErrors() || !authService.register(registrationDTO)) {
 			redirectAttributes.addFlashAttribute("registrationDTO", registrationDTO);
@@ -45,11 +54,15 @@ public class AuthController {
 			return "redirect:/register";
 		}
 
-		return "redirect:/login";
+		return REDIRECT_LOGIN;
 	}
 
 	@GetMapping("/login")
 	public String login() {
+		if(this.authService.isLogged()) {
+			return REDIRECT_HOME;
+		}
+
 		//create this method
 		//go to html - add thymeleaf, th:action/method, th:object, th:field, errorclass
 		//create DTO class
@@ -60,20 +73,24 @@ public class AuthController {
 
 	@PostMapping("/login")
 	public String login(@Valid UserLoginDTO loginDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+		if(this.authService.isLogged()) {
+			return REDIRECT_HOME;
+		}
+
 		if (bindingResult.hasErrors()) {
 			redirectAttributes.addFlashAttribute("loginDTO", loginDTO);
 			redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginDTO", bindingResult);
 
-			return "redirect:/login";
+			return REDIRECT_LOGIN;
 		}
 		if (!this.authService.login(loginDTO)) {
 			redirectAttributes.addFlashAttribute("loginDTO", loginDTO);
 			redirectAttributes.addFlashAttribute("badCredentials", true);
 
-			return "redirect:/login";
+			return REDIRECT_LOGIN;
 		}
 
-		return "redirect:/home";
+		return REDIRECT_HOME;
 	}
 
 	@GetMapping("/logout")
